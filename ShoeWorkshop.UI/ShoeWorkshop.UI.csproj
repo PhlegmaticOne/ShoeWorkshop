@@ -6,4 +6,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ShoeWorkshop.Database\ShoeWorkshop.Database.csproj" />
+    <ProjectReference Include="..\ShoeWorkshop.Domain\ShoeWorkshop.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

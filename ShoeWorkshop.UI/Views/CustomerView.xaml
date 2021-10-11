@@ -5,8 +5,51 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShoeWorkshop.UI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="Customer"/>
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="{StaticResource MainNavigationBrush}">
+    <Grid Margin="0 30 0 0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.8*"/>
+            <ColumnDefinition Width="2.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.Resources>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource LabelStyle}"/>
+                <Style TargetType="Button" BasedOn="{StaticResource ButtonStyle}"/>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <TextBlock Padding="0 10" Text="Adding new customer form" HorizontalAlignment="Center"
+                           FontSize="18" Foreground="{StaticResource MainNavigationFontColorBrush}"
+                           FontFamily="{StaticResource NavigationFontFamily}"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <WrapPanel Margin="0 8">
+                    <TextBlock Text="Name" />
+                    <TextBox Width="200" Margin="50 10 10 10"/>
+                </WrapPanel>
+            </Grid>
+            <Grid Grid.Row="2">
+                <WrapPanel Margin="0 8">
+                    <TextBlock Text="Surname" />
+                    <TextBox Width="200" Margin="35 10 10 10"/>
+                </WrapPanel>
+            </Grid>
+            <Grid Grid.Row="3">
+                <WrapPanel Margin="0 8">
+                    <TextBlock Text="Phone" />
+                    <TextBox Width="200" Margin="48 10 10 10"/>
+                </WrapPanel>
+            </Grid>
+            <Grid Grid.Row="4" Margin="0 8">
+                <Button Content="Add" Command="{Binding AddNewCustomerCommand}"/>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

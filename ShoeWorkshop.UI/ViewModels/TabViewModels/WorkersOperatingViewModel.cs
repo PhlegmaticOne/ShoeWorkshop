@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ShoeWorkshop.Domain.Services;
 
 namespace ShoeWorkshop.UI.ViewModels
 {
     public class WorkersOperatingViewModel : BaseViewModel 
     {
+        private readonly IWorkerService _workerService;
+
+        public WorkersOperatingViewModel(IWorkerService workerService) => _workerService = workerService;
     }
 }

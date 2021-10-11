@@ -17,7 +17,13 @@ namespace ShoeWorkshop.Database
 
             builder.Property(p => p.Price).IsRequired();
 
-            builder.Property(p => p.PaymentTime).IsRequired();
+            builder.Property(p => p.PaymentTime)
+                            .HasColumnType("datetime")
+                            .IsRequired();
+
+            builder.Property(p => p.EndOfRepair)
+                            .HasColumnType("datetime")
+                            .IsRequired();
 
             builder.Property(p => p.IsEnded).HasDefaultValue(false);
 

@@ -1,17 +1,13 @@
 ﻿using ShoeWorkshop.UI.State;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShoeWorkshop.UI.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        public INavigator Navigator { get; } = new Navigator();
-        public MainViewModel()
+        public INavigator Navigator { get; }
+        public MainViewModel(INavigator navigator)
         {
+            Navigator = navigator;
             Navigator.ChangeCurrentViewModelCommand.Execute(ViewType.MainData);
         }
     }

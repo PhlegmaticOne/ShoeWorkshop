@@ -1,5 +1,6 @@
 ﻿using ShoeWorkshop.UI.State;
 using ShoeWorkshop.UI.ViewModels;
+using ShoeWorkshop.UI.ViewModels.Factories;
 using System;
 using System.Windows.Input;
 
@@ -9,21 +10,20 @@ namespace ShoeWorkshop.UI.Commands
     {
         public event EventHandler CanExecuteChanged;
         private readonly INavigator _navigator;
+        private readonly IShoeWorkshopAbstractFactory _factory;
 
-        public ChangeCurrentViewModelCommand(INavigator navigator) => _navigator = navigator;
+        public ChangeCurrentViewModelCommand(INavigator navigator, IShoeWorkshopAbstractFactory factory)
+        {
+            _navigator = navigator;
+            _factory = factory;
+        }
 
         public bool CanExecute(object parameter) => true;
         public void Execute(object parameter)
         {
             if(parameter is ViewType viewType)
             {
-                _navigator.CurrentViewModel = viewType switch
-                {
-                    ViewType.Repair => new RepairsOperatingViewModel(),
-                    ViewType.Worker => new WorkersOperatingViewModel(),
-                    ViewType.Customer => new CustomersOperatingViewModel(),
-                    _ => new MainDataViewModel()
-                };
+                _navigator.CurrentViewModel = _factory.CreateViewModel(viewType);
             }
         }
     }

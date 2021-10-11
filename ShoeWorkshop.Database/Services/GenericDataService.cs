@@ -1,7 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShoeWorkshop.Domain;
 using ShoeWorkshop.Domain.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace ShoeWorkshop.Database
@@ -46,7 +49,15 @@ namespace ShoeWorkshop.Database
         {
             using (var context = _contextFactory.CreateDbContext())
             {
-                return await context.Set<T>().FirstOrDefaultAsync(e => e.Id == id);
+                return await context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+            }
+        }
+
+        public async Task<IEnumerable<T>> GetWithInclude(params Expression<Func<T, object>>[] includeProperties)
+        {
+            using (var context = _contextFactory.CreateDbContext())
+            {
+                return await Include(context, includeProperties).ToListAsync();
             }
         }
 
@@ -59,6 +70,11 @@ namespace ShoeWorkshop.Database
                 await context.SaveChangesAsync();
                 return entity;
             }
+        }
+        private IQueryable<T> Include(ShoeWorkshopDbContext context, params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = context.Set<T>().AsNoTracking();
+            return includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
         }
     }
 }

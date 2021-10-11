@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShoeWorkshop.Database;
 
 namespace ShoeWorkshop.Database.Migrations
 {
     [DbContext(typeof(ShoeWorkshopDbContext))]
-    partial class ShoeWorkshopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211011103628_add-total-repairs")]
+    partial class addtotalrepairs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +64,7 @@ namespace ShoeWorkshop.Database.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EndOfRepair")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsEnded")
                         .ValueGeneratedOnAdd()
@@ -70,7 +72,7 @@ namespace ShoeWorkshop.Database.Migrations
                         .HasDefaultValue(false);
 
                     b.Property<DateTime>("PaymentTime")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
